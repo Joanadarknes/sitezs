@@ -294,6 +294,45 @@
     }
     .icon-btn:hover{ transform:translateY(-3px); }
 
+    /* =========================================================
+       ✅ SETINHA FIXA (canto inferior direito)
+       ========================================================= */
+    .scroll-fab{
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 2500;
+      width: 54px;
+      height: 54px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+      color: var(--text);
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 16px 55px rgba(0,0,0,0.22);
+      transition: transform .22s var(--ease), box-shadow .22s var(--ease);
+      -webkit-tap-highlight-color: transparent;
+    }
+    .scroll-fab:hover{
+      transform: translateY(-4px);
+      box-shadow: 0 22px 80px rgba(0,0,0,0.28);
+    }
+    .scroll-fab:active{ transform: translateY(-2px) scale(0.99); }
+    .scroll-fab span{
+      font-size: 1.25rem;
+      font-weight: 900;
+      line-height: 1;
+      transform: translateY(-1px);
+      text-shadow: 0 0 16px rgba(0,200,255,0.15);
+    }
+    [data-theme="light"] .scroll-fab{
+      background: linear-gradient(180deg, rgba(0,0,0,0.05), rgba(0,0,0,0.02));
+      box-shadow: 0 14px 45px rgba(0,0,0,0.10);
+    }
+
     section.content{ padding: 4.2rem 0; }
 
     #sobre .profile{
@@ -769,6 +808,7 @@
     @media (max-width:720px){
       .discord-card{ width: 92%; }
       .corner-logo{ opacity: 0.08; filter: blur(2px); }
+      .scroll-fab{ right: 14px; bottom: 14px; }
     }
   </style>
 </head>
@@ -787,7 +827,8 @@
 
   <!-- Splash -->
   <div id="introLogo" aria-hidden="false">
-    <img class="intro-img" src="LogoInicio.png" alt="Logo de início">
+    <!-- ✅ vai trocar para preto no tema light -->
+    <img class="intro-img" id="introLogoImg" src="LogoInicio.png" alt="Logo de início">
   </div>
 
   <div id="preloader" aria-hidden="false"><div class="spinner" aria-hidden="true"></div></div>
@@ -797,6 +838,11 @@
       <span id="themeIcon">🌙</span>
     </button>
   </div>
+
+  <!-- ✅ Setinha (canto inferior direito) -->
+  <button id="scrollFab" class="scroll-fab" type="button" title="Descer" aria-label="Descer">
+    <span id="scrollFabIcon">↓</span>
+  </button>
 
   <div class="top-space">
     <div class="logo-wrap" aria-label="Logo da empresa">
@@ -819,7 +865,7 @@
             <a class="soc" data-ic="tiktok" href="https://www.tiktok.com/@raaydesigner_" target="_blank" rel="noopener" aria-label="TikTok" title="TikTok">
               <img class="icon-theme" data-base="FFFFFF" src="https://img.icons8.com/?size=100&id=118638&format=png&color=FFFFFF" alt="TikTok">
             </a>
-            <a class="soc" data-ic="email" href="https://zonasulagenciacriativa@outlook.com.br/" aria-label="Email" title="Email">
+            <a class="soc" data-ic="email" href="mailto:zonasulagenciacriativa@outlook.com.br" aria-label="Email" title="Email">
               <img class="icon-theme" data-base="FFFFFF" src="https://img.icons8.com/?size=100&id=iUAL2gKFxVxc&format=png&color=FFFFFF" alt="Email">
             </a>
             <a class="soc" data-ic="link portfólio" href="https://www.behance.net/zonasulstore" target="_blank" rel="noopener" aria-label="Behance" title="Behance">
@@ -839,7 +885,8 @@
             <div class="discord-card" role="group" aria-label="Entrar no Discord">
               <div class="dc-left">
                 <div class="dc-logo-slot" aria-hidden="false">
-                  <img src="LogoInicio.png" alt="Logo Zona Sul">
+                  <!-- ✅ vai trocar para preto no tema light -->
+                  <img id="dcLogoImg" src="LogoInicio.png" alt="Logo Zona Sul">
                 </div>
 
                 <div class="dc-text">
@@ -968,6 +1015,46 @@
     })();
 
     /* =========================
+       ✅ SETINHA (descer/subir)
+       ========================= */
+    (function scrollFab(){
+      const btn = document.getElementById('scrollFab');
+      const ic  = document.getElementById('scrollFabIcon');
+      if (!btn || !ic) return;
+
+      function update(){
+        const y = window.scrollY || document.documentElement.scrollTop || 0;
+        const nearTop = y < 140;
+
+        if (nearTop){
+          btn.dataset.dir = 'down';
+          ic.textContent = '↓';
+          btn.title = 'Descer';
+          btn.setAttribute('aria-label', 'Descer');
+        } else {
+          btn.dataset.dir = 'up';
+          ic.textContent = '↑';
+          btn.title = 'Subir';
+          btn.setAttribute('aria-label', 'Subir');
+        }
+      }
+
+      btn.addEventListener('click', () => {
+        const dir = btn.dataset.dir || 'down';
+        if (dir === 'down'){
+          const max = document.documentElement.scrollHeight;
+          window.scrollTo({ top: max, behavior: 'smooth' });
+        } else {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      });
+
+      window.addEventListener('scroll', update, { passive:true });
+      window.addEventListener('resize', update, { passive:true });
+      update();
+    })();
+
+    /* =========================
        THEME TOGGLE
        ========================= */
     function applyCursorTheme(force){
@@ -998,8 +1085,17 @@
       else document.documentElement.removeAttribute('data-theme');
       localStorage.setItem('theme', isLight ? 'light' : 'dark');
 
+      // ✅ logo principal já alterna
       const logo = document.getElementById('logoImg');
       if (logo) logo.src = isLight ? 'logo.png' : 'logo-white.png';
+
+      // ✅ logo do print (LogoInicio) -> preto no modo white
+      // (Crie esse arquivo: "LogoInicio-black.png")
+      const introLogo = document.getElementById('introLogoImg');
+      if (introLogo) introLogo.src = isLight ? 'LogoInicio-black.png' : 'LogoInicio.png';
+
+      const dcLogo = document.getElementById('dcLogoImg');
+      if (dcLogo) dcLogo.src = isLight ? 'LogoInicio-black.png' : 'LogoInicio.png';
 
       updateSocialIconsBase();
       applyCursorTheme(true);
@@ -1403,11 +1499,9 @@ ${data.skills}`
   }
 
   function buildSmoothPath(segment){
-    // segment = lista de pontos já recortada do tail até head
     const out = [];
     if (segment.length < 2) return out;
 
-    // duplica extremidades
     const list = [segment[0], ...segment, segment[segment.length-1]];
 
     for (let i=0; i<list.length-3; i++){
@@ -1417,7 +1511,6 @@ ${data.skills}`
         out.push(catmullRom(p0,p1,p2,p3,t));
       }
     }
-    // adiciona o último ponto real
     out.push(segment[segment.length-1]);
     return out;
   }
@@ -1433,7 +1526,6 @@ ${data.skills}`
     ctx.lineCap = 'round';
     ctx.lineJoin = 'round';
 
-    // glow macio (faz ficar igual print)
     ctx.shadowColor = color;
     ctx.shadowBlur = shadowBlur;
 
@@ -1461,18 +1553,12 @@ ${data.skills}`
 
     const life = clamp(dist / TARGET_LEN, 0.35, 1.0);
 
-    // ✅ caminho suavizado por spline
     const path = buildSmoothPath(seg);
 
-    // ✅ estria suave: camadas com shadowBlur (bem macio)
-    // glow externo
     strokePath(path, 7.0, rgba(C.r,C.g,C.b,1), 0.05*life, 18);
-    // glow médio
     strokePath(path, 3.6, rgba(C.r,C.g,C.b,1), 0.11*life, 12);
-    // núcleo branco fino (quase sem blur)
     strokePath(path, 1.3, 'rgba(255,255,255,1)', 0.18*life, 2);
 
-    // brilho pequeno na ponta
     ctx.save();
     ctx.globalCompositeOperation = 'lighter';
     const g = ctx.createRadialGradient(head.x, head.y, 0, head.x, head.y, 26);
