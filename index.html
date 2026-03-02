@@ -84,7 +84,6 @@
       filter: contrast(125%) brightness(105%);
     }
 
-    /* ===== Aviso acima do botão (igual print) ===== */
     .info-note{
       width: 100%;
       border-radius: 16px;
@@ -1250,16 +1249,14 @@
       });
     })();
 
-    /* =========================
-       Sons (click + form)
-       ========================= */
+
     (function soundFX(){
       const clickSound = new Audio('click_cursor.mp3');
       const formSound  = new Audio('form.mp3');
       clickSound.preload='auto';
       formSound.preload='auto';
-      clickSound.volume=0.85;
-      formSound.volume=0.95;
+      clickSound.volume=0.25;
+      formSound.volume=0.25;
 
       let unlocked=false;
       let suppressNextClick=false;
@@ -1278,7 +1275,7 @@
         clickSound.volume=0.001;
         safePlay(clickSound);
         setTimeout(()=> clickSound.pause(), 30);
-        setTimeout(()=> clickSound.volume=0.85, 80);
+        setTimeout(()=> clickSound.volume=0.25, 25);
         window.removeEventListener('pointerdown', unlock, true);
         window.removeEventListener('keydown', unlock, true);
       }
