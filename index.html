@@ -1486,7 +1486,7 @@
       const formSound = new Audio('form.mp3');
       clickSound.preload = 'auto';
       formSound.preload = 'auto';
-      clickSound.volume = 0.25;
+      clickSound.volume = 0.15;
       formSound.volume = 0.25;
 
       let unlocked = false;
@@ -1506,7 +1506,7 @@
         clickSound.volume = 0.001;
         safePlay(clickSound);
         setTimeout(() => clickSound.pause(), 30);
-        setTimeout(() => clickSound.volume = 0.25, 25);
+        setTimeout(() => clickSound.volume = 0.15, 25);
         window.removeEventListener('pointerdown', unlock, true);
         window.removeEventListener('keydown', unlock, true);
       }
@@ -1524,9 +1524,6 @@
       };
     })();
 
-    /* =========================
-       Toast popup
-       ========================= */
     (function () {
       const toast = document.getElementById('toast');
       const title = document.getElementById('toastTitle');
@@ -1553,9 +1550,7 @@
       window.__toast = showToast;
     })();
 
-    /* =========================
-       Gate 200 chars + envio
-       ========================= */
+
     (function () {
       const form = document.getElementById('applyForm');
       const submitBtn = document.getElementById('submitBtn');
@@ -1716,7 +1711,7 @@
         return 0;
       }
 
-      // Catmull-Rom spline (suaviza demais)
+
       function catmullRom(p0, p1, p2, p3, t) {
         const t2 = t * t, t3 = t2 * t;
         return {
