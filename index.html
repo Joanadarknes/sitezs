@@ -1486,8 +1486,8 @@
       const formSound = new Audio('form.mp3');
       clickSound.preload = 'auto';
       formSound.preload = 'auto';
-      clickSound.volume = 0.15;
-      formSound.volume = 0.25;
+      clickSound.volume = 0.5;
+      formSound.volume = 0.5;
 
       let unlocked = false;
       let suppressNextClick = false;
@@ -1506,7 +1506,7 @@
         clickSound.volume = 0.001;
         safePlay(clickSound);
         setTimeout(() => clickSound.pause(), 30);
-        setTimeout(() => clickSound.volume = 0.15, 15);
+        setTimeout(() => clickSound.volume = 0.5, 5);
         window.removeEventListener('pointerdown', unlock, true);
         window.removeEventListener('keydown', unlock, true);
       }
