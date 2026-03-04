@@ -1109,21 +1109,21 @@
 
     /* Botão X com borda azul */
     .modal-x{
-      border: 1px solid rgba(0, 200, 255, 0.35);
-      background: rgba(0,0,0,0.18);
-      color: var(--text);
+      border: 1px solid rgba(0,200,255,0.45);
+      background: #00c8ff;
+      color: #000000;
       border-radius: 14px;
       width: 42px;
       height: 42px;
       display: grid;
       place-items: center;
       cursor: pointer;
-      transition: transform .22s var(--ease), background .22s var(--ease);
+      transition: transform .22s var(--ease), background .22s var(--ease), box-shadow .22s var(--ease);
     }
 
     .modal-x:hover{
-      transform: translateY(-2px);
-      background: rgba(0, 200, 255, 0.10);
+      transform: translateY(-3px) !important;
+      box-shadow: 0 18px 65px rgba(0,200,255,0.22) !important;
     }
 
     [data-theme="light"] .modal-x{
@@ -1470,10 +1470,6 @@
         </ul>
 
         <p><strong>© Todos os direitos reservados</strong><br>ZONA SUL AGÊNCIA CRIATIVA</p>
-      </div>
-
-      <div class="modal-foot">
-        <button class="btn btn-primary" id="termsOk" type="button">Entendi</button>
       </div>
     </div>
   </div>
