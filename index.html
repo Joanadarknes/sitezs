@@ -5,6 +5,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Zona Sul Agência Criativa</title>
+  <link rel="icon" type="image/png" href="favicon.png">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&display=swap"
     rel="stylesheet">
 
@@ -77,9 +78,6 @@
       font-weight: 700;
     }
 
-    /* =========================================================
-       TEXTURA GRANULADO
-       ========================================================= */
     .grain-layer {
       position: fixed;
       inset: 0;
@@ -144,7 +142,6 @@
       font-size: .92rem;
     }
 
-    /* tema claro */
     [data-theme="light"] .info-note {
       background: linear-gradient(180deg, rgba(0, 200, 255, 0.10), rgba(0, 200, 255, 0.06));
       border: 1px solid rgba(0, 0, 0, 0.10);
@@ -154,10 +151,6 @@
     [data-theme="light"] .info-text {
       color: rgba(11, 16, 32, 0.70);
     }
-
-    /* =========================================================
-   FUNDO: 1 LOGO GRANDE GIRANDO (central)
-   ========================================================= */
 
     .bg-logo {
       position: fixed;
@@ -202,7 +195,6 @@
       }
     }
 
-    /* ✅ LUZ PASSANDO (1 só, suave) */
     .bg-beam {
       position: fixed;
       inset: 0;
@@ -268,7 +260,6 @@
       filter: blur(52px);
     }
 
-    /* ===== Canvas do rastro do mouse ===== */
     #sparkleCanvas {
       position: fixed;
       inset: 0;
@@ -277,12 +268,10 @@
       width: 100%;
       height: 100%;
 
-      /* o “look” de luz na tela */
       mix-blend-mode: screen;
       opacity: .95;
     }
 
-    /* ===== Preloader ===== */
     #preloader {
       position: fixed;
       inset: 0;
@@ -319,7 +308,6 @@
       }
     }
 
-    /* ===== Layout ===== */
     .container {
       width: 92%;
       max-width: var(--container);
@@ -372,9 +360,6 @@
       transform: translateY(-3px);
     }
 
-    /* =========================================================
-       ✅ SETINHA FIXA (canto inferior direito)
-       ========================================================= */
     .scroll-fab {
       position: fixed;
       right: 18px;
@@ -512,7 +497,6 @@
       max-width: 70ch;
     }
 
-    /* ===== Card estilo “Discord Join” ===== */
     .cta {
       margin: .6rem auto 0;
       display: flex;
@@ -666,7 +650,6 @@
       letter-spacing: .2px;
     }
 
-    /* ===== Form ===== */
     .btn {
       display: inline-flex;
       align-items: center;
@@ -875,9 +858,6 @@
       font-size: .92rem
     }
 
-    /* =========================================================
-       INTRO LOGO
-       ========================================================= */
     #introLogo {
       position: fixed;
       inset: 0;
@@ -945,9 +925,6 @@
       transition: transform 760ms var(--ease), opacity 420ms var(--ease), filter 760ms var(--ease);
     }
 
-    /* =========================================================
-       TOAST
-       ========================================================= */
     .toast {
       position: fixed;
       left: 50%;
@@ -1024,6 +1001,206 @@
         right: 14px;
         bottom: 14px;
       }
+
+      .icon-btn {
+        font-size: .95rem;
+        padding: .6rem .7rem;
+      }
+    }
+
+    /* =========================
+       MODAL - TERMOS DE SERVIÇO
+       ========================= */
+      .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 4500;
+      display: none;
+    }
+
+    .modal.open {
+      display: block;
+    }
+
+    .modal-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.62);
+      backdrop-filter: blur(10px);
+    }
+
+    .modal-card {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+
+      width: min(920px, 92vw);
+      max-height: min(78vh, 720px);
+
+      /* ✅ FIX: header + body (scroll) + footer */
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+
+      border-radius: 22px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.03));
+      box-shadow: 0 24px 95px rgba(0, 0, 0, 0.36);
+      backdrop-filter: blur(16px);
+    }
+
+    [data-theme="light"] .modal-card {
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.02));
+      box-shadow: 0 18px 70px rgba(0, 0, 0, 0.14);
+    }
+
+    .modal-head {
+      flex: 0 0 auto;
+
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem 1.1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+    }
+
+    [data-theme="light"] .modal-head {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.10);
+    }
+
+    .modal-title {
+      font-weight: 900;
+      letter-spacing: .2px;
+      color: var(--accent);
+      font-size: 1.05rem;
+      line-height: 1.2;
+    }
+
+    .modal-sub {
+      color: var(--muted);
+      font-weight: 600;
+      font-size: .82rem;
+      margin-top: .15rem;
+    }
+
+    .modal-x {
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: rgba(0, 0, 0, 0.22);
+      color: var(--text);
+      border-radius: 14px;
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      transition: transform .22s var(--ease);
+    }
+
+    [data-theme="light"] .modal-x {
+      background: rgba(0, 0, 0, 0.06);
+      border: 1px solid rgba(0, 0, 0, 0.12);
+    }
+
+    .modal-x:hover {
+      transform: translateY(-2px);
+    }
+
+    .modal-body {
+      /* ✅ FIX: só o body rola, footer não corta */
+      flex: 1 1 auto;
+      overflow: auto;
+
+      padding: 1rem 1.1rem 1.2rem;
+
+      /* ✅ remove o cálculo antigo que bugava */
+      max-height: none;
+    }
+
+    .modal-body p {
+      margin: 0 0 .9rem;
+      color: var(--muted);
+      font-weight: 300;
+    }
+
+    .modal-body strong {
+      color: var(--text);
+      font-weight: 900;
+    }
+
+    .modal-body h4 {
+      margin: 1rem 0 .45rem;
+      font-size: .92rem;
+      letter-spacing: .2px;
+      color: var(--text);
+      font-weight: 900;
+    }
+
+    .modal-body ul {
+      margin: 0 0 .85rem 1.15rem;
+      padding: 0;
+      color: var(--muted);
+      font-weight: 300;
+    }
+
+    .modal-body li {
+      margin: .35rem 0;
+    }
+
+    .modal-foot {
+      flex: 0 0 auto;
+
+      padding: .9rem 1.1rem 1.1rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.10);
+      display: flex;
+      justify-content: flex-end;
+      gap: .6rem;
+    }
+
+    [data-theme="light"] .modal-foot {
+      border-top: 1px solid rgba(0, 0, 0, 0.10);
+    }
+
+    body.modal-lock {
+      overflow: hidden;
+    }
+    /* ===== FIX LEGIBILIDADE MODO LIGHT ===== */
+
+    [data-theme="light"] .modal-body p{
+      color:#ffffff;
+    }
+
+    [data-theme="light"] .modal-body li{
+      color:#ffffff;
+    }
+
+    [data-theme="light"] .modal-body ul{
+      color:#ffffff;
+    }
+
+    [data-theme="light"] .modal-body strong{
+      color:#ffffff;
+    }
+
+    [data-theme="light"] .modal-body h4{
+      color:#ffffff;
+    }
+
+    [data-theme="light"] .modal-sub{
+      color:#ffffff;
+    }
+
+    [data-theme="light"] .modal-title{
+      color:#009fd1;
+    }
+
+    /* ✅ extra: em celular dá mais espaço pro modal */
+    @media (max-width: 520px) {
+      .modal-card {
+        max-height: 86vh;
+      }
     }
   </style>
 </head>
@@ -1031,18 +1208,12 @@
 <body>
 
   <div class="bg-logo" aria-hidden="true"></div>
-
-  <!-- ✅ 1 luz passeando -->
   <div class="bg-beam" aria-hidden="true"></div>
-
   <div class="grain-layer" aria-hidden="true"></div>
 
-  <!-- ✅ rastro do mouse -->
   <canvas id="sparkleCanvas" aria-hidden="true"></canvas>
 
-  <!-- Splash -->
   <div id="introLogo" aria-hidden="false">
-    <!-- ✅ vai trocar para preto no tema light -->
     <img class="intro-img" id="introLogoImg" src="LogoInicio.png" alt="Logo de início">
   </div>
 
@@ -1050,13 +1221,18 @@
     <div class="spinner" aria-hidden="true"></div>
   </div>
 
+  <!-- ✅ CONTROLES: Termos + Tema -->
   <div class="floating-controls" aria-hidden="false">
+    <button id="termsBtn" class="icon-btn" type="button" title="Termos de serviço" aria-haspopup="dialog"
+      aria-controls="termsModal" aria-expanded="false">
+      📄 Termos de serviço
+    </button>
+
     <button id="themeToggle" class="icon-btn" title="Alternar tema" aria-pressed="false" aria-label="Alternar tema">
       <span id="themeIcon">🌙</span>
     </button>
   </div>
 
-  <!-- ✅ Setinha (canto inferior direito) -->
   <button id="scrollFab" class="scroll-fab" type="button" title="Descer" aria-label="Descer">
     <span id="scrollFabIcon">↓</span>
   </button>
@@ -1112,7 +1288,6 @@
             <div class="discord-card" role="group" aria-label="Entrar no Discord">
               <div class="dc-left">
                 <div class="dc-logo-slot" aria-hidden="false">
-                  <!-- ✅ vai trocar para preto no tema light -->
                   <img id="dcLogoImg" src="LogoInicio.png" alt="Logo Zona Sul">
                 </div>
 
@@ -1211,7 +1386,7 @@
 
   <footer>
     <div class="container">
-      <p>&copy; <span id="year"></span> Zona Sul Agência Criativa</p>
+      <p>&copy; <span id="year"></span> Zona Sul Agência Criativa <br>CNPJ 58.673.835/0001-92</p>
     </div>
   </footer>
 
@@ -1224,15 +1399,132 @@
     <button id="toastClose" class="t-x" type="button">Fechar</button>
   </div>
 
+  <!-- ✅ MODAL: TERMOS DE SERVIÇO -->
+  <div id="termsModal" class="modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="termsTitle">
+    <div class="modal-backdrop" data-close="1"></div>
+
+    <div class="modal-card" role="document">
+      <div class="modal-head">
+        <div>
+          <div id="termsTitle" class="modal-title">Termos de Serviço</div>
+          <div class="modal-sub">ZONA SUL AGÊNCIA CRIATIVA</div>
+        </div>
+        <button id="termsClose" class="modal-x" type="button" aria-label="Fechar">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <p><strong>Termos e Condições</strong> regulam a contratação dos serviços prestados pela <strong>ZONA SUL AGÊNCIA
+            CRIATIVA</strong>.
+          Ao contratar nossos serviços, o cliente declara estar ciente e de acordo com as condições abaixo:</p>
+
+        <h4>(FORMA DE PAGAMENTO)</h4>
+        <ul>
+          <li>O pagamento deverá ser realizado de forma <strong>100% antecipada</strong>, como condição para início do
+            projeto.</li>
+          <li>O atendimento e início da execução do projeto ocorrerão por ordem de confirmação de pagamento, mediante
+            agendamento de data informada ao cliente.</li>
+        </ul>
+
+        <h4>(PRAZOS E ENTREGA)</h4>
+        <ul>
+          <li>O prazo de entrega será informado previamente no momento da contratação.</li>
+          <li>Durante a execução do projeto, serão enviados prints, vídeos ou prévias digitais para acompanhamento e
+            aprovação do cliente.</li>
+          <li>Os arquivos finais serão entregues via e-mail ou direto ao ticket.</li>
+        </ul>
+
+        <h4>(ALTERAÇÕES)</h4>
+        <ul>
+          <li>Durante o período de atendimento, alterações são permitidas.</li>
+          <li>Não há taxa adicional dentro da fase de desenvolvimento.</li>
+          <li>Alterações solicitadas após a aprovação do cliente poderão ser realizadas mediante novo orçamento.</li>
+        </ul>
+
+        <h4>(ARQUIVOS E BACKUP)</h4>
+        <ul>
+          <li>É de responsabilidade do cliente realizar o backup imediato dos arquivos recebidos.</li>
+          <li>O reenvio de arquivos poderá estar sujeito à taxa.</li>
+          <li>Os links de download poderão ser desativados após meses para organização interna. Recomenda-se o download
+            imediato.</li>
+        </ul>
+
+        <h4>(ARQUIVO EDITÁVEL (PSD)</h4>
+        <ul>
+          <li>O cliente poderá solicitar o arquivo editável (PSD) mediante pagamento adicional.</li>
+          <li>A cessão do arquivo editável não implica transferência automática de direitos autorais integrais, salvo
+            acordo formal específico.</li>
+        </ul>
+
+        <h4>(SERVIÇOS DIGITAIS E CURSOS)</h4>
+        <ul>
+          <li>Após a liberação de acesso a cursos ou conteúdos digitais, não será possível reembolso, conforme art. 49 do
+            Código de Defesa do Consumidor, considerando a natureza de conteúdo digital disponibilizado imediatamente
+          </li>
+          <li>Proibido o compartilhamento, revenda ou reprodução dos cursos. O descumprimento acarretará:
+            <ul>
+              <li>Cancelamento imediato do acesso;</li>
+              <li>Possíveis medidas judiciais cabíveis.</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h4>(CANCELAMENTO E REEMBOLSO)</h4>
+        <ul>
+          <li>Em caso de cancelamento antes do início do projeto, será realizado reembolso integral.</li>
+          <li>Em caso de cancelamento após o início do projeto, será retido o valor proporcional aos serviços já
+            executados.</li>
+        </ul>
+
+        <h4>(SCRIPTS, VEICULOS, MAPAS E ROUPAS)</h4>
+        <ul>
+          <li>Os arquivos add-ons e demais produtos digitais comercializados pela ZONA SUL AGÊNCIA CRIATIVA são bens
+            intangíveis de entrega imediata, disponibilizados por meio eletrônico.</li>
+          <li>O produto não é passível de devolução após o download ou acesso;</li>
+          <li>O início do uso implica concordância com a perda do direito de arrependimento, nos termos do art. 49 do
+            Código de Defesa do Consumidor, considerando a natureza do produto digital.</li>
+          <li>Em caso de falha técnica comprovada que impeça o funcionamento do produto conforme descrito, a ZONA SUL
+            AGÊNCIA CRIATIVA compromete-se a oferecer suporte técnico ou solução adequada.</li>
+        </ul>
+
+        <h4>(DIREITOS AUTORAIS)</h4>
+        <ul>
+          <li>Os direitos autorais morais permanecem com a Zona Sul Agência Criativa, conforme Lei nº 9.610/98.</li>
+          <li>A revenda, redistribuição ou modificação para fins comerciais por terceiros sem autorização é proibida.
+          </li>
+        </ul>
+
+        <h4>(DISPOSIÇÕES FINAIS)</h4>
+        <ul>
+          <li>A execução dos projetos poderá envolver profissionais freelancers e prestadores de serviço contratados,
+            permanecendo a ZONA SUL ÂGENCIA CRIATIVA integralmente responsável perante o cliente pelos serviços
+            prestados.</li>
+          <li>Os presentes Termos e Condições são regidos e interpretados de acordo com a legislação da República
+            Federativa do Brasil, especialmente:
+            <ul>
+              <li>Código de Defesa do Consumidor (Lei nº 8.078/1990)</li>
+              <li>Lei de Direitos Autorais (Lei nº 9.610/1998)</li>
+              <li>Código Civil (Lei nº 10.406/2002)</li>
+              <li>Demais normas aplicáveis à prestação de serviços e comercialização de produtos digitais no território
+                nacional</li>
+            </ul>
+          </li>
+        </ul>
+
+        <p><strong>© Todos os direitos reservados</strong><br>ZONA SUL AGÊNCIA CRIATIVA</p>
+      </div>
+
+      <div class="modal-foot">
+        <button class="btn btn-primary" id="termsOk" type="button">Entendi</button>
+      </div>
+    </div>
+  </div>
+
   <script>
     const WEBHOOK_URL = "https://discord.com/api/webhooks/1476679954476437706/cPJ3W2v9r4fczuYF_PqMM3uM85ZS41Fzi5TTZHBUbzgDk1-CYW1Pm-E6q5D229PaAhvG";
     const MIN_CHARS = 200;
 
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    /* =========================
-       PRELOADER (nunca infinito)
-       ========================= */
     (function () {
       const pre = document.getElementById('preloader');
       if (!pre) return;
@@ -1244,9 +1536,6 @@
       setTimeout(hide, 1800);
     })();
 
-    /* =========================
-       ✅ SETINHA (descer/subir)
-       ========================= */
     (function scrollFab() {
       const btn = document.getElementById('scrollFab');
       const ic = document.getElementById('scrollFabIcon');
@@ -1284,9 +1573,6 @@
       update();
     })();
 
-    /* =========================
-       THEME TOGGLE
-       ========================= */
     function applyCursorTheme(force) {
       const isLight = document.documentElement.getAttribute('data-theme') === 'light';
       const file = isLight ? 'cursor-white.png' : 'cursor-white.png';
@@ -1315,12 +1601,9 @@
       else document.documentElement.removeAttribute('data-theme');
       localStorage.setItem('theme', isLight ? 'light' : 'dark');
 
-      // ✅ logo principal já alterna
       const logo = document.getElementById('logoImg');
       if (logo) logo.src = isLight ? 'logo.png' : 'logo-white.png';
 
-      // ✅ logo do print (LogoInicio) -> preto no modo white
-      // (Crie esse arquivo: "LogoInicio-black.png")
       const introLogo = document.getElementById('introLogoImg');
       if (introLogo) introLogo.src = isLight ? 'LogoInicio-black.png' : 'LogoInicio.png';
 
@@ -1347,9 +1630,6 @@
       });
     })();
 
-    /* =========================
-       ÍCONES
-       ========================= */
     function replaceColorParam(url, colorHex) {
       if (!url.includes('img.icons8.com')) return url;
       if (url.includes('color=')) return url.replace(/color=[0-9A-Fa-f]{3,6}/, `color=${colorHex}`);
@@ -1380,9 +1660,6 @@
       });
     })();
 
-    /* =========================
-       Membros reais (invite counts)
-       ========================= */
     (function discordMemberCount() {
       const el = document.getElementById('memberCount');
       const btn = document.getElementById('discordBtn');
@@ -1408,9 +1685,6 @@
         .catch(() => el.textContent = '—');
     })();
 
-    /* =========================
-       INTRO: encaixar no "O"
-       ========================= */
     (function introDockToO() {
       const intro = document.getElementById('introLogo');
       const introImg = intro?.querySelector('.intro-img');
@@ -1465,9 +1739,6 @@
       start();
     })();
 
-    /* =========================
-       Abrir/fechar form
-       ========================= */
     (function () {
       const wrap = document.getElementById('applyWrap');
       const btn = document.getElementById('openApplyBtn');
@@ -1479,7 +1750,6 @@
         wrap.setAttribute('aria-hidden', isOpen ? 'true' : 'false');
       });
     })();
-
 
     (function soundFX() {
       const clickSound = new Audio('click_cursor.mp3');
@@ -1549,7 +1819,6 @@
       close?.addEventListener('click', () => toast.classList.remove('show'));
       window.__toast = showToast;
     })();
-
 
     (function () {
       const form = document.getElementById('applyForm');
@@ -1639,6 +1908,49 @@
       });
     })();
 
+    /* ✅ MODAL - Termos de serviço (abre/fecha + ESC + clique no fundo) */
+    (function termsModal() {
+      const btn = document.getElementById('termsBtn');
+      const modal = document.getElementById('termsModal');
+      const close = document.getElementById('termsClose');
+      const ok = document.getElementById('termsOk');
+      const backdrop = modal?.querySelector('.modal-backdrop');
+
+      if (!btn || !modal) return;
+
+      let lastFocus = null;
+
+      function open() {
+        lastFocus = document.activeElement;
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden', 'false');
+        btn.setAttribute('aria-expanded', 'true');
+        document.body.classList.add('modal-lock');
+
+        // foca no botão fechar (melhor acessibilidade)
+        setTimeout(() => (close || ok || modal).focus?.(), 0);
+      }
+
+      function shut() {
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden', 'true');
+        btn.setAttribute('aria-expanded', 'false');
+        document.body.classList.remove('modal-lock');
+        lastFocus?.focus?.();
+      }
+
+      btn.addEventListener('click', open);
+      close?.addEventListener('click', shut);
+      ok?.addEventListener('click', shut);
+
+      backdrop?.addEventListener('click', shut);
+
+      document.addEventListener('keydown', (e) => {
+        if (!modal.classList.contains('open')) return;
+        if (e.key === 'Escape') shut();
+      });
+    })();
+
     (function cursorBlueStreak_Smooth() {
       const canvas = document.getElementById('sparkleCanvas');
       if (!canvas) return;
@@ -1665,12 +1977,11 @@
       const rgba = (r, g, b, a) => `rgba(${r},${g},${b},${a})`;
       const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 
-      // ===== parâmetros “suaves” =====
       const pts = [];
-      const MAX_AGE = 90;          // dura um pouco mais p/ ficar sedoso
-      const TARGET_LEN = 160;      // comprimento parecido com o print
-      const MIN_MOVE = 0.35;       // pega mais pontos -> mais suave
-      const SPLINE_STEPS = 10;     // densidade da curva (mais = mais suave)
+      const MAX_AGE = 90;
+      const TARGET_LEN = 160;
+      const MIN_MOVE = 0.35;
+      const SPLINE_STEPS = 10;
 
       let pmx = innerWidth * 0.5, pmy = innerHeight * 0.5;
       let lastMove = performance.now();
@@ -1689,13 +2000,12 @@
         }
       }, { passive: true });
 
-      // ===== apagar SEM manchar =====
       function fade() {
         const idle = (performance.now() - lastMove) > 80;
         ctx.save();
         ctx.globalCompositeOperation = 'destination-out';
         ctx.fillStyle = 'rgba(0,0,0,1)';
-        ctx.globalAlpha = idle ? 0.52 : 0.34; // maior = apaga mais rápido
+        ctx.globalAlpha = idle ? 0.52 : 0.34;
         ctx.fillRect(0, 0, innerWidth, innerHeight);
         ctx.restore();
       }
@@ -1710,7 +2020,6 @@
         }
         return 0;
       }
-
 
       function catmullRom(p0, p1, p2, p3, t) {
         const t2 = t * t, t3 = t2 * t;
@@ -1800,7 +2109,6 @@
         draw();
         requestAnimationFrame(tick);
       }
-
       ctx.clearRect(0, 0, innerWidth, innerHeight);
       requestAnimationFrame(tick);
     })();
