@@ -1129,22 +1129,25 @@
       color: var(--text);
     }
 
-@media (max-width:520px){
-  .modal-card{
-    left: 12px;
-    right: 12px;
-    width: auto;
+    @media (max-width:520px){
+      .modal-card{
+        left: 12px;
+        right: 12px;
+        width: auto;
 
-    /* garante que o topo (onde fica o X) nunca some */
-    top: calc(env(safe-area-inset-top, 0px) + 12px);
+        /* prende o modal dentro da tela (não deixa o topo sumir) */
+        top: calc(env(safe-area-inset-top, 0px) + 12px);
+        bottom: calc(env(safe-area-inset-bottom, 0px) + 78px);
 
-    /* deixa espaço pro scroll-fab e barra do celular */
-    bottom: calc(env(safe-area-inset-bottom, 0px) + 78px);
+        /* altura correta no mobile */
+        max-height: calc(
+          100dvh
+          - (env(safe-area-inset-top, 0px) + 12px)
+          - (env(safe-area-inset-bottom, 0px) + 78px)
+        );
+      }
 
-    /* usa viewport dinâmico do mobile */
-    max-height: calc(100dvh - (env(safe-area-inset-top, 0px) + 12px) - (env(safe-area-inset-bottom, 0px) + 78px));
-  }
-
+      /* deixa a “barra” do topo (logo + X) sempre visível */
       .modal-head{
         position: sticky;
         top: 0;
@@ -1153,7 +1156,15 @@
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
       }
+
+      /* scroll mais suave no iPhone/Android */
+      .modal-body{
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior: contain;
+      }
     }
+
+
     #themeToggle{
       color: var(--accent);
       border-color: rgba(0, 200, 255, 0.35);
@@ -1991,16 +2002,18 @@
 
       let lastFocus = null;
 
-      function open() {
-        lastFocus = document.activeElement;
-        modal.classList.add('open');
-        modal.setAttribute('aria-hidden', 'false');
-        btn.setAttribute('aria-expanded', 'true');
-        document.body.classList.add('modal-lock');
+    function open() {
+      lastFocus = document.activeElement;
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden', 'false');
+      btn.setAttribute('aria-expanded', 'true');
+      document.body.classList.add('modal-lock');
 
-        // foca no botão fechar (melhor acessibilidade)
-        setTimeout(() => (close || ok || modal).focus?.(), 0);
-      }
+      const body = modal.querySelector('.modal-body');
+      if (body) body.scrollTop = 0;
+
+      setTimeout(() => (close || modal).focus?.(), 0);
+    }
 
       function shut() {
         modal.classList.remove('open');
