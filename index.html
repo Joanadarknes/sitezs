@@ -1069,13 +1069,11 @@
 
     /* Cabeçalho */
     .modal-head{
-      flex: 0 0 auto;
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 1rem;
-      padding: 1rem 1.1rem;
-      border-bottom: 1px solid rgba(0, 200, 255, 0.22);
+      display:flex;
+      align-items:center;      /* centraliza vertical */
+      justify-content:space-between;
+      padding:1.4rem 1.2rem;   /* mais espaço */
+      border-bottom:1px solid rgba(0,200,255,0.22);
     }
 
     /* Body rola */
@@ -1184,6 +1182,76 @@
 
     .modal-body::-webkit-scrollbar-thumb:hover{
       background: linear-gradient(180deg,#00d8ff,#00c8ff);
+    }
+
+    /* ===== SCROLL DA PÁGINA ===== */
+
+    ::-webkit-scrollbar{
+      width:10px;
+    }
+
+    ::-webkit-scrollbar-track{
+      background: rgba(255,255,255,0.05);
+    }
+
+    ::-webkit-scrollbar-thumb{
+      background: linear-gradient(180deg,#00c8ff,#009fd1);
+      border-radius:10px;
+      box-shadow:0 0 8px rgba(0,200,255,0.35);
+    }
+
+    ::-webkit-scrollbar-thumb:hover{
+      background: linear-gradient(180deg,#00d8ff,#00c8ff);
+    }
+
+    /* ===== AJUSTES TERMOS (tamanho + azul + cabeçalho com logo) ===== */
+
+    /* diminui o texto do modal inteiro */
+    .modal-body{
+      font-size: 0.92rem;
+      line-height: 1.55;
+    }
+
+    /* diminui um pouco listas também */
+    .modal-body li{
+      font-size: 0.92rem;
+    }
+
+    /* títulos dentro do modal um pouco menores */
+    .modal-body h4{
+      font-size: 0.95rem;
+      margin: 1rem 0 .55rem;
+    }
+
+    /* deixa o negrito azul (no dark e no light) */
+    .modal-body strong{
+      color: var(--accent);
+      font-weight: 900;
+    }
+
+    /* no light não “volta pro preto” */
+    [data-theme="light"] .modal-body strong{
+      color: var(--accent);
+    }
+
+    /* deixa a frase específica azul */
+    .terms-blue{
+      color: var(--accent);
+      font-weight: 700;
+    }
+    .terms-head-logo {
+        height: 48px;
+        width: auto;
+        display: block;
+        margin-bottom: -5px;
+        filter: drop-shadow(0 0 14px rgba(0, 200, 255, 0.18));
+    }
+    /* ===== AUMENTAR O RETÂNGULO ATÉ A SETINHA ===== */
+    /* o scroll-fab fica bottom:18px e tem 54px de altura
+      então colocamos o modal encostando “até em cima” dele */
+    .modal-card{
+      bottom: 82px;            /* 18 + 54 + ~10 de respiro */
+      max-height: min(78vh, 720px);
     }
   </style>
 </head>
@@ -1388,10 +1456,9 @@
 
     <div class="modal-card" role="document">
       <div class="modal-head">
-        <div>
-          <div id="termsTitle" class="modal-title">Termos de Serviços</div>
-          <div class="modal-sub">ZONA SUL AGÊNCIA CRIATIVA</div>
-        </div>
+      <div>
+        <img class="terms-head-logo" src="logo-termo.png" alt="Zona Sul Agência Criativa">
+      </div>
         <button id="termsClose" class="modal-x" type="button" aria-label="Fechar">✕</button>
       </div>
 
@@ -1478,9 +1545,11 @@
 
         <h4>DISPOSIÇÕES FINAIS</h4>
         <ul>
-          <li>A execução dos projetos poderá envolver profissionais freelancers e prestadores de serviço contratados,
+         <li class="terms-blue">
+            A execução dos projetos poderá envolver profissionais freelancers e prestadores de serviço contratados,
             permanecendo a ZONA SUL ÂGENCIA CRIATIVA integralmente responsável perante o cliente pelos serviços
-            prestados.</li>
+            prestados.
+          </li>
           <li>Os presentes Termos e Condições são regidos e interpretados de acordo com a legislação da República
             Federativa do Brasil, especialmente:
             <ul>
