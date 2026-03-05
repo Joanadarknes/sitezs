@@ -1249,10 +1249,18 @@
     /* ===== AUMENTAR O RETÂNGULO ATÉ A SETINHA ===== */
     /* o scroll-fab fica bottom:18px e tem 54px de altura
       então colocamos o modal encostando “até em cima” dele */
-    .modal-card{
-      bottom: 82px;            /* 18 + 54 + ~10 de respiro */
-      max-height: min(78vh, 720px);
+    .modal-card
+    {
+        bottom: 85px;
+        max-height: min(92vh, 746px);
     }
+
+    [data-theme="light"] .terms-head-logo{
+    content: url("logo-termobl.png");
+  }
+  [data-theme="light"] .modal-body p strong{
+  color:#000000;
+  }
   </style>
 </head>
 
@@ -1463,8 +1471,8 @@
       </div>
 
       <div class="modal-body">
-        <p><strong>Termos e Condições</strong> regulam a contratação dos serviços prestados pela <strong>ZONA SUL AGÊNCIA
-            CRIATIVA</strong>.
+        <p>Termos e Condições regulam a contratação dos serviços prestados pela <strong>ZONA SUL AGÊNCIA
+            CRIATIVA</strong>.<br>
           Ao contratar nossos serviços, o cliente declara estar ciente e de acordo com as condições abaixo:</p>
 
         <h4>FORMA DE PAGAMENTO</h4>
@@ -1651,6 +1659,9 @@
 
       const logo = document.getElementById('logoImg');
       if (logo) logo.src = isLight ? 'logo.png' : 'logo-white.png';
+
+      const termsLogo = document.getElementById('termsLogo');
+      if (termsLogo) termsLogo.src = isLight ? 'logo.png' : 'logo-white.png';
 
       const introLogo = document.getElementById('introLogoImg');
       if (introLogo) introLogo.src = isLight ? 'LogoInicio-black.png' : 'LogoInicio.png';
