@@ -1129,13 +1129,29 @@
       color: var(--text);
     }
 
-    @media (max-width:520px){
-      .modal-card{
-        right: 12px;
-        left: 12px;
-        width: auto;
-        bottom: 78px;
-        max-height: 76vh;
+@media (max-width:520px){
+  .modal-card{
+    left: 12px;
+    right: 12px;
+    width: auto;
+
+    /* garante que o topo (onde fica o X) nunca some */
+    top: calc(env(safe-area-inset-top, 0px) + 12px);
+
+    /* deixa espaço pro scroll-fab e barra do celular */
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 78px);
+
+    /* usa viewport dinâmico do mobile */
+    max-height: calc(100dvh - (env(safe-area-inset-top, 0px) + 12px) - (env(safe-area-inset-bottom, 0px) + 78px));
+  }
+
+      .modal-head{
+        position: sticky;
+        top: 0;
+        z-index: 2;
+        background: inherit;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
       }
     }
     #themeToggle{
@@ -1810,49 +1826,48 @@
       });
     })();
 
-    (function soundFX() {
-      const clickSound = new Audio('click_cursor.mp3');
-      const formSound = new Audio('form.mp3');
-      clickSound.preload = 'auto';
-      formSound.preload = 'auto';
-      clickSound.volume = 0.5;
-      formSound.volume = 0.5;
+  (function soundFX() {
+    const clickSound = new Audio('click_cursor.mp3'); // clique normal
+    const bellSound  = new Audio('form.mp3');         // campainha (popup)
 
-      let unlocked = false;
-      let suppressNextClick = false;
+    clickSound.preload = 'auto';
+    bellSound.preload  = 'auto';
 
-      function safePlay(audio) {
-        try {
-          audio.currentTime = 0;
-          const p = audio.play();
-          if (p && p.catch) p.catch(() => { });
-        } catch (e) { }
-      }
+    clickSound.volume = 0.5;
+    bellSound.volume  = 0.5;
 
-      function unlock() {
-        if (unlocked) return;
-        unlocked = true;
-        clickSound.volume = 0.001;
-        safePlay(clickSound);
-        setTimeout(() => clickSound.pause(), 30);
-        setTimeout(() => clickSound.volume = 0.5, 5);
-        window.removeEventListener('pointerdown', unlock, true);
-        window.removeEventListener('keydown', unlock, true);
-      }
-      window.addEventListener('pointerdown', unlock, true);
-      window.addEventListener('keydown', unlock, true);
+    let unlocked = false;
 
-      document.addEventListener('click', () => {
-        if (suppressNextClick) { suppressNextClick = false; return; }
-        safePlay(clickSound);
-      }, true);
+    function safePlay(audio) {
+      try {
+        audio.currentTime = 0;
+        const p = audio.play();
+        if (p && p.catch) p.catch(() => {});
+      } catch (e) {}
+    }
 
-      window.__playFormSound = function () {
-        suppressNextClick = true;
-        safePlay(formSound);
-      };
-    })();
+    // unlock de áudio (mobile)
+    function unlock() {
+      if (unlocked) return;
+      unlocked = true;
+      clickSound.volume = 0.001;
+      safePlay(clickSound);
+      setTimeout(() => clickSound.pause(), 30);
+      setTimeout(() => clickSound.volume = 0.5, 5);
+      window.removeEventListener('pointerdown', unlock, true);
+      window.removeEventListener('keydown', unlock, true);
+    }
+    window.addEventListener('pointerdown', unlock, true);
+    window.addEventListener('keydown', unlock, true);
 
+    // Clique normal em qualquer click
+    document.addEventListener('click', () => safePlay(clickSound), true);
+
+    // Campainha: só quando você chamar
+    window.__playBellSound = function () {
+      safePlay(bellSound);
+    };
+  })();
     (function () {
       const toast = document.getElementById('toast');
       const title = document.getElementById('toastTitle');
@@ -1868,7 +1883,7 @@
         toast.classList.add('show');
 
         if ((t || '').toLowerCase().includes('enviado')) {
-          window.__playFormSound?.();
+          window.__playBellSound?.(); // campainha só quando o popup subir (sucesso)
         }
 
         clearTimeout(timer);
@@ -1908,8 +1923,6 @@
 
         if (submitBtn.disabled) { skills.reportValidity(); skills.focus(); return; }
         if (!form.reportValidity()) return;
-
-        window.__playFormSound?.();
 
         submitBtn.disabled = true;
         const original = submitBtn.textContent;
